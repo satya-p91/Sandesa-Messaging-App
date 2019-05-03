@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_background"
+    tools:context=".MenuItems.GroupInfo">
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/grp_name"
+        android:textColor="#fff"
+        android:text="test"
+        android:layout_marginTop="40dp"
+        android:gravity="center_horizontal"
+        android:textSize="50dp"
+        android:padding="10dp"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/grp_name"
+        android:id="@+id/admin_name"
+        android:textColor="#fff"
+        android:text="dfa"
+        android:layout_marginTop="35dp"
+        android:textSize="25dp"
+        android:padding="15dp" />
+
+    <TextView
+        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/admin_name"
+        android:id="@+id/admin_email"
+        android:textColor="#fff"
+        android:text="dft"
+        android:textSize="25dp"
+        android:padding="15dp" />
+
+
+    <Button
+        android:id="@+id/btn_mute"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:layout_marginTop="500dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp"
+        android:text="Mute"
+        android:background="@drawable/circular_button"
+        />
+
+
+
+
+
+</RelativeLayout>

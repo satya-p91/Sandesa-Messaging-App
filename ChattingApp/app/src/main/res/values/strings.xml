@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">ChattingApp</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="hint_name">Full Name</string>
+    <string name="hint_email">Email</string>
+    <string name="err_msg_name">Enter full name</string>
+    <string name="err_msg_email">Enter valid email address</string>
+    <string name="title_activity_chat_room_discussion">ChatRoomDiscussionActivity</string>
+    <string name="title_activity_user_room_discussion">UserRoomDiscussionActivity</string>
+
+    <string name="action_logout">Logout</string>
+
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+
+    <string name="app_detail">This is an instant messaging app using firebase cloud messaging API. In this app you can chat one to one and chat in public groups created by admin or you can create your own group and add users in it.</string>
+</resources>

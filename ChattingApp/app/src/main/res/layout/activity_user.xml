@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_background"
+    tools:context=".MenuItems.User">
+
+
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@mipmap/user_icon"
+        android:elevation="9dp"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/user_icon"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_icon"
+        android:id="@+id/user_name"
+        android:textColor="#fff"
+        android:layout_marginTop="35dp"
+        android:textSize="25dp"
+        android:padding="10dp"
+        android:layout_centerHorizontal="true"/>
+
+
+    <TextView
+        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_name"
+        android:id="@+id/user_email"
+        android:textColor="#fff"
+        android:layout_marginTop="35dp"
+        android:textSize="25dp"
+        android:padding="10dp" />
+
+
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:layout_marginTop="500dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp"
+        android:text="Logout"
+        android:background="@drawable/circular_button"
+        />
+
+
+
+
+</RelativeLayout>
