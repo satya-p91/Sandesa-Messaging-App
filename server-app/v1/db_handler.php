@@ -21,7 +21,7 @@ class DbHandler{
         if($this->verifyEmailAndPassword($email,$pass)){
             // User with same email already existed in the db
             $res["error"] = false;
-            $res['message'] = "Email exist. Please Login...";
+            $res['message'] = "Login Successfull";
             $res["user"] = $this->getUserByEmail($email);
         }else{
             $res["error"] = true;
@@ -54,13 +54,12 @@ class DbHandler{
             }else{
                 // Failed to create user
                 $res["error"] = true;
-                $res["message"] = "Oops! An error occurred while registereing:(";
+                $res["message"] = "Oops! An error occurred while registereing. :(";
             }
         } else {
             // User with same email already existed in the db
-            $res["error"] = false;
+            $res["error"] = true;
             $res['message'] = "Email already exist. Please Login...";
-            $res["user"] = $this->getUserByEmail($email);
         }
         return $res;
     }
