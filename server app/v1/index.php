@@ -9,11 +9,36 @@ require 'vendor/autoload.php';
 $app = new Slim\App();
 
 
-
-// User login
+//user login
 $app->post('/user/login', function($request, $response){
     // check for required params
-    verifyRequiredParams($request, $response,array('name', 'email'));
+    verifyRequiredParams($request, $response,array('email','pass'));
+ 
+    // reading post params
+
+    $all = $request->getParsedBody();
+
+    $email = $all['email'];
+    $pass = $all['pass'];
+ 
+    // validating email address
+    validateEmail($email);
+ 
+    $db = new DbHandler();
+    $res = $db->verifyLoginUser($email, $pass);
+ 
+    // echo json response
+
+    return $response->withStatus(200)->withJson($res);
+
+});
+
+
+
+// User signup
+$app->post('/user/signup', function($request, $response){
+    // check for required params
+    verifyRequiredParams($request, $response,array('name', 'email','pass'));
  
     // reading post params
 
@@ -21,12 +46,13 @@ $app->post('/user/login', function($request, $response){
 
      $name = $all['name'];
      $email = $all['email'];
+     $pass = $all['pass'];
  
     // validating email address
     validateEmail($email);
  
     $db = new DbHandler();
-    $res = $db->createUser($name, $email);
+    $res = $db->createUser($name, $email, $pass);
  
     // echo json response
 

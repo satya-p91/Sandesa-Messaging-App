@@ -15,18 +15,33 @@ class DbHandler{
     }
 
 
+    public function verifyLoginUser($email, $pass){
+        $res = array();
+
+        if($this->verifyEmailAndPassword($email,$pass)){
+            // User with same email already existed in the db
+            $res["error"] = false;
+            $res['message'] = "Email exist. Please Login...";
+            $res["user"] = $this->getUserByEmail($email);
+        }else{
+            $res["error"] = true;
+            $res["message"] = "Email or password is worng. Try again...";
+        }
+        return $res;
+
+    }
+
     //it creates new user
 
-    public function createUser($name, $email){
+    public function createUser($name, $email, $pass){
         $res = array();
 
         //first check if usr exist
 
         if(!$this->isUserExists($email)){
-            $stmt = $this->conn->prepare("INSERT INTO users(name, email) values(?, ?)");
+            $stmt = $this->conn->prepare("INSERT INTO users(name, email, password) values(?, ?, ?)");
 
-            $stmt->bind_param("ss",$name,$email);
-
+            $stmt->bind_param("sss",$name,$email,$pass);
             $result = $stmt->execute();
             $stmt->close();
 
@@ -41,10 +56,10 @@ class DbHandler{
                 $res["error"] = true;
                 $res["message"] = "Oops! An error occurred while registereing:(";
             }
-        }else {
+        } else {
             // User with same email already existed in the db
             $res["error"] = false;
-            $res['message'] = "Email already exist.";
+            $res['message'] = "Email already exist. Please Login...";
             $res["user"] = $this->getUserByEmail($email);
         }
         return $res;
@@ -262,22 +277,33 @@ class DbHandler{
         return $num_rows > 0;
     }
 
+    public function verifyEmailAndPassword($email, $pass){
+        $stmt = $this->conn->prepare("SELECT user_id from users WHERE email = ? AND password = ?");
+        $stmt->bind_param("ss", $email, $pass);
+        $stmt->execute();
+        $stmt->store_result();
+        $num_rows = $stmt->num_rows;
+        $stmt->close();
+        return $num_rows > 0;
+    }
+
         /**
      * Fetching user by email
      * @param String $email User email id
      */
     public function getUserByEmail($email) {
-        $stmt = $this->conn->prepare("SELECT user_id, name, email, created_at FROM users WHERE email = ?");
+        $stmt = $this->conn->prepare("SELECT user_id, name, email, created_at, password FROM users WHERE email = ?");
         $stmt->bind_param("s", $email);
         if ($stmt->execute()) {
             // $user = $stmt->get_result()->fetch_assoc();
-            $stmt->bind_result($user_id, $name, $email, $created_at);
+            $stmt->bind_result($user_id, $name, $email, $created_at, $password);
             $stmt->fetch();
             $user = array();
             $user["user_id"] = $user_id;
             $user["name"] = $name;
             $user["email"] = $email;
             $user["created_at"] = $created_at;
+            $user["pass"] = $password;
             $stmt->close();
             return $user;
         } else {
