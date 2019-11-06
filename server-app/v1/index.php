@@ -142,8 +142,6 @@ $app->post('/users/push_test', function($request, $response){
  * Updating user
  *  we use this url to update user's fcm registration id
  */
-
- 
 $app->put('/user/{id}', function($request,$response,$user_id){
     
     verifyRequiredParams($request,$response,array('fcm'));
@@ -154,7 +152,6 @@ $app->put('/user/{id}', function($request,$response,$user_id){
     $res = $db->updateFcmID($user_id['id'], $fcm['fcm']);
  
     return $response->withStatus(200)->withJson($res);
-    
 });
 
 
@@ -166,10 +163,16 @@ $app->get('/all_users', function($request,$response){
     $res['error'] = false;
     $res['all_users'] = array();
 
-   
+    while($user = $result->fetch_assoc()){
+        $tmp = array();
+        $tmp["user_id"] = $user["user_id"];
+        $tmp["name"] = $user["name"];
+        $tmp["created_at"] = $user["created_at"];
+        $tmp["email"] = $user["email"];
+        $tmp["fcm_id"] = $user["fcm_registration_id"];
+        array_push($res["all_users"], $tmp);
+    }
     
-
-
     return $response->withStatus(200)->withJson($res);
 });
 
@@ -196,7 +199,6 @@ $app->get('/chat_rooms', function($request,$response) {
         $tmp["created_at"] = $chat_room["created_at"];
         array_push($res["chat_rooms"], $tmp);
     }
- 
     return $response->withStatus(200)->withJson($res);
 });
  

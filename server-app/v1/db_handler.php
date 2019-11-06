@@ -86,6 +86,16 @@ class DbHandler{
         return $res;
     }
 
+    //fetch all users
+
+    public function getAllUsers(){
+        $stmt = $this->conn->prepare("SELECT user_id, name, email, fcm_registration_id, created_at FROM users");
+        $stmt->execute();
+        $tasks = $stmt->get_result();
+        $stmt->close();
+        return $tasks;
+    }
+
     // fetching single user by id
     public function getUser($user_id) {
         $stmt = $this->conn->prepare("SELECT user_id, name, email, fcm_registration_id, created_at FROM users WHERE user_id = ?");
